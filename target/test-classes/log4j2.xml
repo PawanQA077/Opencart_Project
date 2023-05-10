@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This log 4j2 xml file templet contains three sections i.e Properties, Appenders and Loggers 
+	 1) Properties => It contains path of our folder where we want to store log so we created logs folder under project hence we mentioed /.logs
+	 2) Appenders => It contains 2 sub sections i.e Console and RollingFile 
+	 			  => Here we used both for displaying logs of execution code in console window and we created file under logs folder by the name 
+	 			     of automation with time stamp
+	 3) Loggers => Here we can use multiple log levels from any one of them i.e  All < Trace < Debug < Info < Warn < Error < Fatal < Off 
+	 			   If we select Info then including Info and after all options logs will be genereated
+	 			=> Then we save all this log on our file by using Appenderref as File, we can display on cosole window also by making ref ="Console"
+-->
+
+<Configuration status="WARN"> 
+
+	<Properties>
+		<Property name="basePath">./logs</Property>
+	</Properties>
+
+
+  <Appenders>
+   	 <Console name="Console" target="SYSTEM_OUT">
+      	<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+     </Console>
+    
+     <RollingFile name="File" fileName="${basePath}/automation.log" filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log">
+     	<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      	<SizeBasedTriggeringPolicy size="50000" />
+  	 </RollingFile>
+  </Appenders>
+  
+  
+  <Loggers>
+   	 <Root level="Info">			<!-- Here you can use multiple log levels All < Trace < Debug < Info < Warn < Error < Fatal < Off -->
+     <AppenderRef ref="File"/> 		
+   <!-- <AppenderRef ref="Console"/> -->  
+     </Root>
+  </Loggers>
+  
+</Configuration>
